@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS study_buddy;
+CREATE DATABASE study_buddy;

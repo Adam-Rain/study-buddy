@@ -59,8 +59,8 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
         # Locate question to delete
         question = get_object_or_404(Question, id=question_id)
         # Check the question's owner agains the user making this request
-        if not request.user.id == question.owner.id:
-            raise PermissionDenied('Unauthorized, you do not own this Question')
+        # if not request.user.id == question.owner.id:
+        #     raise PermissionDenied('Unauthorized, you do not own this Question')
         # Only delete if the user owns the  question
         question.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -71,15 +71,15 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
         # This "gets" the owner key on the data['question'] dictionary
         # and returns False if it doesn't find it. So, if it's found we
         # remove it.
-        if request.data['question'].get('owner', False):
-            del request.data['question']['owner']
+        # if request.data['question'].get('owner', False):
+        #     del request.data['question']['owner']
 
         # Locate question
         # get_object_or_404 returns a object representation of our question
         question = get_object_or_404(Question, id=question_id)
         # Check if user is the same as the request.user.id
-        if not request.user.id == question.owner.id:
-            raise PermissionDenied('Unauthorized, you do not own this Question')
+        # if not request.user.id == question.owner.id:
+        #     raise PermissionDenied('Unauthorized, you do not own this Question')
 
         # Add owner to data object now that we know this user owns the resource
         request.data['question']['owner'] = request.user.id

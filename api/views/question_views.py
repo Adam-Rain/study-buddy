@@ -26,10 +26,10 @@ class Questions(generics.ListCreateAPIView):
         data = QuestionSerializer(questions, many=True).data
         return Response({ 'questions': data })
 
-    def post(self, request):
+    def post(self, request, question_set_id):
         """Create request"""
         # Add user to request data object
-        request.data['question']['owner'] = request.user.id
+        # request.data['question']['owner'] = request.user.id
         # Serialize/create question
         question = QuestionSerializer(data=request.data['question'])
         # If the question data is valid according to our serializer...

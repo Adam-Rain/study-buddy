@@ -17,7 +17,7 @@ class QuestionSetSerializer(serializers.ModelSerializer):
     questions = QuestionSerializer(many=True, read_only=True)
     class Meta:
         model = QuestionSet
-        fields = ('topic', 'owner', 'id')
+        fields = ('topic', 'questions', 'owner', 'id')
 
 class UserSerializer(serializers.ModelSerializer):
     # This model serializer will be used for User creation

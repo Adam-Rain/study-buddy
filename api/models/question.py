@@ -6,7 +6,7 @@ class Question(models.Model):
   question = models.CharField(max_length=500)
   answer = models.CharField(max_length=500)
   question_set = models.ForeignKey(
-    'Question Set',
+    'QuestionSet',
     related_name='questions',
     on_delete=models.CASCADE
   )

@@ -9,12 +9,12 @@ class QuestionSet(models.Model):
     on_delete=models.CASCADE
   )
 
-def __str__(self):
-  return f"This set is about {self.topic} and is owned by {self.owner}"
+  def __str__(self):
+    return f"This set is about {self.topic} and is owned by {self.owner}"
 
-def as_dict(self):
-  return {
+  def as_dict(self):
+    return {
     'id': self.id,
     'topic': self.topic,
     'owner': self.owner
-  }
+    }

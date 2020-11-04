@@ -8,7 +8,7 @@ from django.contrib.auth import get_user, authenticate, login, logout
 from django.middleware.csrf import get_token
 
 from ..models.mango import Mango
-from ..serializers import MangoSerializer, UserSerializer
+# from ..serializers import MangoSerializer, UserSerializer
 
 # Create your views here.
 class Mangos(generics.ListCreateAPIView):

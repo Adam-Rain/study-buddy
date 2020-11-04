@@ -16,7 +16,7 @@ class Question(models.Model):
 
   def as_dict(self):
     return {
-    'id': self.id,
-    'question': self.question,
-    'answer': self.answer
+      'id': self.id,
+      'question': self.question,
+      'answer': self.answer
     }

@@ -11,15 +11,17 @@ from ..models.question import Question
 from ..serializers import QuestionSerializer, UserSerializer
 
 # Create your views here.
-class Question(generics.ListCreateAPIView):
+class Questions(generics.ListCreateAPIView):
     permission_classes=(IsAuthenticated,)
     serializer_class = QuestionSerializer
-    def get(self, request):
+    def get(self, request, question_set_id):
         """Index request"""
         # Get all the Questions:
-        questions = Question.objects.all()
+        # questions = Question.objects.all()
         # Filter the Question Sets by owner, so you can only see your owned Question Sets
-        # question_sets = QuestionSet.objects.filter(owner=request.user.id)
+        # print(question_set_id)
+        questions = Question.objects.filter(question_set=question_set_id)
+        print(questions)
         # Run the data through the serializer
         data = QuestionSerializer(questions, many=True).data
         return Response({ 'questions': data })
@@ -40,10 +42,10 @@ class Question(generics.ListCreateAPIView):
 
 class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=(IsAuthenticated,)
-    def get(self, request, pk):
+    def get(self, request, question_id):
         """Show request"""
         # Locate the question to show
-        question = get_object_or_404(Question, pk=pk)
+        question = get_object_or_404(Question, id=question_id)
         # Only want to show owned mangos?
         # if not request.user.id == question_set.owner.id:
         #     raise PermissionDenied('Unauthorized, you do not own this Question Set')
@@ -52,10 +54,10 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
         data = QuestionSerializer(question).data
         return Response({ 'question': data })
 
-    def delete(self, request, pk):
+    def delete(self, request, question_id):
         """Delete request"""
         # Locate question to delete
-        question = get_object_or_404(Question, pk=pk)
+        question = get_object_or_404(Question, id=question_id)
         # Check the question's owner agains the user making this request
         if not request.user.id == question.owner.id:
             raise PermissionDenied('Unauthorized, you do not own this Question')
@@ -63,7 +65,7 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
         question.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    def partial_update(self, request, pk):
+    def partial_update(self, request, question_id):
         """Update Request"""
         # Remove owner from request object
         # This "gets" the owner key on the data['question'] dictionary
@@ -74,7 +76,7 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
 
         # Locate question
         # get_object_or_404 returns a object representation of our question
-        question = get_object_or_404(Question, pk=pk)
+        question = get_object_or_404(Question, id=question_id)
         # Check if user is the same as the request.user.id
         if not request.user.id == question.owner.id:
             raise PermissionDenied('Unauthorized, you do not own this Question')

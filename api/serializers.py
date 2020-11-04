@@ -14,6 +14,7 @@ class QuestionReadSerializer(QuestionSerializer):
   question_set = serializers.StringRelatedField()
 
 class QuestionSetSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True, read_only=True)
     class Meta:
         model = QuestionSet
         fields = ('topic', 'owner', 'id')

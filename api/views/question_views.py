@@ -13,7 +13,7 @@ from ..serializers import QuestionSerializer, UserSerializer
 # Create your views here.
 class Question(generics.ListCreateAPIView):
     permission_classes=(IsAuthenticated,)
-    serializer_class = QuestionSetSerializer
+    serializer_class = QuestionSerializer
     def get(self, request):
         """Index request"""
         # Get all the Questions:

@@ -18,5 +18,6 @@ class Question(models.Model):
     return {
       'id': self.id,
       'question': self.question,
-      'answer': self.answer
+      'answer': self.answer,
+      'question_set': self.question_set
     }

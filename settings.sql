@@ -1,2 +1,2 @@
-DROP DATABASE IF EXISTS study_buddy;
-CREATE DATABASE study_buddy;
+DROP DATABASE IF EXISTS study-buddy;
+CREATE DATABASE study-buddy;

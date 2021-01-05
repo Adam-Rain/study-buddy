@@ -1,2 +1,2 @@
-web: gunicorn study_buddy.wsgi
+web: gunicorn study-buddy.wsgi
 release: python manage.py migrate

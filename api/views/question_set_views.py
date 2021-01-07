@@ -12,7 +12,6 @@ from ..serializers import QuestionSetSerializer, UserSerializer
 
 # Create your views here.
 class QuestionSets(generics.ListCreateAPIView):
-    authentication_classes = ()
     permission_classes = ()
     serializer_class = QuestionSetSerializer
     def get(self, request):
@@ -29,6 +28,7 @@ class QuestionSets(generics.ListCreateAPIView):
         """Create request"""
         # Add user to request data object
         request.data['question_set']['owner'] = request.user.id
+        print("this is the request.user", request.user) #returns None?
         # Serialize/create mango
         question_set = QuestionSetSerializer(data=request.data['question_set'])
         # If the mango data is valid according to our serializer...

@@ -15,6 +15,5 @@ class QuestionSet(models.Model):
   def as_dict(self):
     return {
     'id': self.id,
-    'topic': self.topic,
-    'owner': self.owner
+    'topic': self.topic
     }
